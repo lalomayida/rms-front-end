@@ -1,4 +1,4 @@
-import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbThemeModule, NbThemeService, NbSidebarService } from '@nebular/theme';
+import { NbLayoutModule, NbSidebarModule, NbButtonModule, NbThemeModule, NbThemeService, NbSidebarService, NbMenuModule, NbCardModule, NbUserModule, NbActionsModule } from '@nebular/theme';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -7,10 +7,14 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +24,11 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbSidebarModule.forRoot(),
     NbButtonModule,
     RouterModule,
+    NbCardModule,
     BrowserAnimationsModule,
+    NbUserModule,
+    NbActionsModule,
+    NbMenuModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbEvaIconsModule
   ],
