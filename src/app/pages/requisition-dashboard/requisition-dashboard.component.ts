@@ -10,6 +10,7 @@ export class RequisitionDashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

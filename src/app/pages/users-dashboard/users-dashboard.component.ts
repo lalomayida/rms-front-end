@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { UserService } from "src/services/user/user.service";
-import { User } from 'src/app/models/user';
 import {Router} from '@angular/router';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-users-dashboard',
@@ -40,7 +40,8 @@ export class UsersDashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public accessChecker: NbAccessChecker
   ) {
   }
 

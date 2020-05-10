@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,12 +9,87 @@ import { NbMenuItem } from '@nebular/theme';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(public accessChecker: NbAccessChecker) { }
 
   ngOnInit(): void {
   }
 
-  items: NbMenuItem[] = [
+  userItems: NbMenuItem[] = [
+    {
+      title: 'USUARIO',
+      group: true,
+    },
+    {
+      title: 'Requisiciones',
+      icon: 'file-text-outline',
+      expanded: true,
+      children: [
+        {
+          title: 'Ver Requisiciones',
+          url: '/pages/requisition-dashboard',
+          icon: 'eye-outline',
+        },
+        {
+          title: 'Crear Requisiciones',
+          icon: 'file-add-outline',
+        },
+      ]
+    },
+    {
+      title: 'Help',
+      icon: 'question-mark-circle-outline'
+    },
+  ];
+
+  adminItems: NbMenuItem[] = [
+    {
+      title: 'USUARIO',
+      group: true,
+    },
+    {
+      title: 'Requisiciones',
+      icon: 'file-text-outline',
+      expanded: true,
+      children: [
+        {
+          title: 'Ver Requisiciones',
+          url: '/pages/requisition-dashboard',
+          icon: 'eye-outline',
+        },
+        {
+          title: 'Crear Requisiciones',
+          icon: 'file-add-outline',
+        },
+      ]
+    },
+    {
+      title: 'ADMINISTRADOR',
+      group: true,
+    },
+    {
+      title: 'Instalaciones',
+      icon: 'pin-outline',
+      expanded: true,
+      children: [
+        {
+          title: 'Ver Instalaciones',
+          icon: 'eye-outline',
+          url: 'pages/room-dashboard'
+        },
+        {
+          title: 'Crear Instalaciones',
+          icon: 'home-outline',
+          url: 'pages/room-create'
+        },
+      ]
+    },
+    {
+      title: 'Help',
+      icon: 'question-mark-circle-outline'
+    },
+  ];
+
+  superAdminItems: NbMenuItem[] = [
     {
       title: 'USUARIO',
       group: true,

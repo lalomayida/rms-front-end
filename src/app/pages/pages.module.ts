@@ -17,6 +17,7 @@ import {
   , NbDialogService
   , NbListModule
   , NbTooltipModule
+  , NbContextMenuModule
 } from '@nebular/theme';
 import { CommonModule } from '@angular/common';  
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -71,6 +72,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     , NbTooltipModule
     , NbSidebarModule
     , NbMenuModule
+    , NbContextMenuModule
     , NbDialogModule.forChild()
   ],
   providers: [NbSidebarService, NbThemeService, NbDialogService]

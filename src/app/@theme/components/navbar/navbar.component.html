@@ -10,8 +10,11 @@
             <nb-action class="user-action">
                 <nb-user 
                     size="medium" 
-                    name="John Doe" 
-                    title="Engineer">
+                    shape = "semi-round"
+                    [nbContextMenu]="userMenu"
+                    nbContextMenuTag="user-context-menu"
+                    [name]="sessionUser.name +' '+ sessionUser.surname" 
+                    [title]="sessionUser.role.name">
                 </nb-user>
             </nb-action>
         </nb-actions>
