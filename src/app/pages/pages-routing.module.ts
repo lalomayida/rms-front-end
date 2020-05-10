@@ -40,7 +40,7 @@ const routes: Routes = [{
     {
       path: 'room-create',
       component: RoomCreateComponent
-    },]
+    }]
 }
 ];
 

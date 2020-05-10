@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card *ngIf="accessChecker.isGranted('view', 'rooms') | async">
     <nb-card-header>Listado de Usuarios</nb-card-header>
     <nb-card-body>
         <input nbInput type="text" style="padding:8px;margin:15px auto;width:30%;"

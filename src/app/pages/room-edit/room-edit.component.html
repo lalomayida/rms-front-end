@@ -14,7 +14,7 @@
     </nb-card>
 </ng-template>
 
-<nb-card>
+<nb-card *ngIf="accessChecker.isGranted('edit', 'rooms') | async">
     <nb-card-header>Editar Instalación - {{room.name}}</nb-card-header>
     <nb-card-body>
         <div class="row">

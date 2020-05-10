@@ -5,6 +5,7 @@ import { UserService } from "src/services/user/user.service";
 import { Role } from 'src/app/models/role';
 import { User } from 'src/app/models/user';
 import { NbDialogService, NbDialogConfig } from '@nebular/theme';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-user-create',
@@ -24,7 +25,8 @@ export class UserCreateComponent implements OnInit {
     private roleService: RoleService,
     private userService: UserService,
     private router: Router,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    public accessChecker: NbAccessChecker
   ) { }
 
   ngOnInit(): void {

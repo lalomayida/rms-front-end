@@ -13,7 +13,7 @@
         </nb-card-footer>
     </nb-card>
 </ng-template>
-<nb-card>
+<nb-card *ngIf="accessChecker.isGranted('create', 'users') | async">
     <nb-card-header>Crear Usuario</nb-card-header>
     <nb-card-body>
         <div class="row">

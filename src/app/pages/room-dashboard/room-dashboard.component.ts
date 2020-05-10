@@ -2,6 +2,8 @@ import { Component, OnInit, Output } from '@angular/core';
 import { RoomService } from "src/services/room/room.service";
 import { Room } from 'src/app/models/room';
 import {Router} from '@angular/router';
+import { NbAccessChecker } from '@nebular/security';
+
 
 @Component({
   selector: 'app-room-dashboard',
@@ -43,7 +45,8 @@ export class RoomDashboardComponent implements OnInit {
 
   constructor(
     private roomSerivce: RoomService,
-    private router: Router
+    private router: Router,
+    public accessChecker: NbAccessChecker
   ) {}
 
   ngOnInit() {

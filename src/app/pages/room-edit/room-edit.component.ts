@@ -9,6 +9,7 @@ import { RoomAttribute } from 'src/app/models/room-attribute';
 import { Room } from 'src/app/models/room';
 
 import { NbDialogService, NbDialogConfig } from '@nebular/theme';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-room-edit',
@@ -32,7 +33,8 @@ export class RoomEditComponent implements OnInit {
     private roomService: RoomService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    public accessChecker: NbAccessChecker
   ) { }
 
   async ngOnInit(): Promise<void> {

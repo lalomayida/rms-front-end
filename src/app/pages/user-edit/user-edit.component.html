@@ -13,7 +13,7 @@
         </nb-card-footer>
     </nb-card>
 </ng-template>
-<nb-card>
+<nb-card *ngIf="accessChecker.isGranted('edit', 'users') | async">
     <nb-card-header>Editar Usuario - {{user.name}} {{user.surname}} </nb-card-header>
     <nb-card-body>
         <div class="row">

@@ -94,17 +94,20 @@ const validation: any = {
         '1': {
           view: ['own-requisitions','user'],
           create: ['own-requisitions'],
+          edit: ['own-requisitions'],
           remove: ['own-requisitions']
         },
         '2': {
-          view: ['own-requisitions','assigned-requitions', 'rooms','admin'],
-          create: ['own-requisitions','assigned-requitions', 'rooms'],
+          view: ['own-requisitions','assigned-requitions','rooms','admin'],
+          create: ['own-requisitions','assigned-requitions','rooms'],
+          edit:  ['own-requisitions','assigned-requitions', 'rooms'],
           remove: ['own-requisitions','assigned-requisitions']
         },
         '3': {
-          view: ['own-requisitions','assigned-requitions', 'rooms','users','super_admin'],
-          create: ['own-requisitions','assigned-requitions', 'rooms','users'],
-          remove: ['own-requisitions','assigned-requisitions']
+          view: ['own-requisitions','all-requitions', 'rooms','users','super_admin'],
+          create: ['own-requisitions','all-requitions', 'rooms','users'],
+          edit: ['own-requisitions','all-requitions', 'rooms','users'],
+          remove: ['own-requisitions','all-requisitions']
         },
       },
     }
