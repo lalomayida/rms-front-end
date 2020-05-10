@@ -36,10 +36,13 @@ export class SidebarComponent implements OnInit {
       children: [
         {
           title: 'Ver Usuarios',
+          url: '/user-dashboard',
           icon: 'eye-outline',
+
         },
         {
           title: 'Crear Usuarios',
+          url: '/user-create',
           icon: 'person-add-outline',
         },
       ]
@@ -52,10 +55,12 @@ export class SidebarComponent implements OnInit {
         {
           title: 'Ver Instalaciones',
           icon: 'eye-outline',
+          url: 'room-dashboard'
         },
         {
           title: 'Crear Instalaciones',
           icon: 'home-outline',
+          url:'room-create'
         },
       ]
     },
