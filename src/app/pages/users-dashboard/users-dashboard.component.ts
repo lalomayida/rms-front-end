@@ -60,7 +60,7 @@ export class UsersDashboardComponent implements OnInit {
   }
 
   editUser(idUser): void{
-    this.router.navigate(['/user-edit'],{
+    this.router.navigate(['pages/user-edit'],{
       queryParams: {
         id:idUser
       }

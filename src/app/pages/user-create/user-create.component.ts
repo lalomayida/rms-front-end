@@ -58,7 +58,7 @@ export class UserCreateComponent implements OnInit {
           this.header ="Éxito";
           this.body = "El usuario se ha creado exitosamente";
           this.open(dialog);
-          this.router.navigate(['/user-dashboard'])
+          this.router.navigate(['pages/user-dashboard'])
         }
         else if (result.status === 'error' && result.error.code == "23505") {
           this.header ="Error";
@@ -74,6 +74,6 @@ export class UserCreateComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/user-dashboard'])
+    this.router.navigate(['pages/user-dashboard'])
   }
 }

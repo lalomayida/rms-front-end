@@ -15,12 +15,17 @@ export class SidebarComponent implements OnInit {
 
   items: NbMenuItem[] = [
     {
+      title: 'USUARIO',
+      group: true,
+    },
+    {
       title: 'Requisiciones',
       icon: 'file-text-outline',
       expanded: true,
       children: [
         {
           title: 'Ver Requisiciones',
+          url: '/pages/requisition-dashboard',
           icon: 'eye-outline',
         },
         {
@@ -30,19 +35,23 @@ export class SidebarComponent implements OnInit {
       ]
     },
     {
+      title: 'ADMINISTRADOR',
+      group: true,
+    },
+    {
       title: 'Usuarios',
       icon: 'people-outline',
       expanded: true,
       children: [
         {
           title: 'Ver Usuarios',
-          url: '/user-dashboard',
+          url: '/pages/user-dashboard',
           icon: 'eye-outline',
 
         },
         {
           title: 'Crear Usuarios',
-          url: '/user-create',
+          url: '/pages/user-create',
           icon: 'person-add-outline',
         },
       ]
@@ -55,12 +64,12 @@ export class SidebarComponent implements OnInit {
         {
           title: 'Ver Instalaciones',
           icon: 'eye-outline',
-          url: 'room-dashboard'
+          url: 'pages/room-dashboard'
         },
         {
           title: 'Crear Instalaciones',
           icon: 'home-outline',
-          url:'room-create'
+          url: 'pages/room-create'
         },
       ]
     },

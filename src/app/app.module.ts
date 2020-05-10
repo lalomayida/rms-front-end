@@ -17,9 +17,11 @@ import {
   , NbDialogService
   , NbListModule
   , NbTooltipModule
-  
 } from '@nebular/theme';
-import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
+import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
+import { AuthGuard } from './guard/auth-guard.service';
+import { of as observableOf } from 'rxjs/observable/of';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,32 +31,14 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NavbarComponent } from './@theme/components/navbar/navbar.component';
-import { SidebarComponent } from './@theme/components/sidebar/sidebar.component';
-import { UsersDashboardComponent } from './pages/users-dashboard/users-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserCreateComponent } from './pages/user-create/user-create.component';
-import { RoomCreateComponent } from './pages/room-create/room-create.component';
-import { RoomDashboardComponent } from './pages/room-dashboard/room-dashboard.component';
-import { UserEditComponent } from './pages/user-edit/user-edit.component';
-import { RoomEditComponent } from './pages/room-edit/room-edit.component';
-import { AuthModule } from './auth.module';
 
 @NgModule({
   declarations: [
     AppComponent
-    , NavbarComponent
-    , SidebarComponent
-    , UsersDashboardComponent
-    , UserCreateComponent
-    , RoomCreateComponent
-    , RoomDashboardComponent
-    , UserEditComponent
-    , RoomEditComponent
   ],
   imports: [
-    AuthModule
-    , NgxDatatableModule
+    NgxDatatableModule
     , BrowserModule
     , FormsModule
     , AppRoutingModule
@@ -70,28 +54,87 @@ import { AuthModule } from './auth.module';
     , NbIconModule
     , NbInputModule
     , NbCheckboxModule
-    , NbSidebarModule.forRoot()
-    , NbMenuModule.forRoot()
-    , NbThemeModule.forRoot({ name: 'default' })
-    , NbDialogModule.forRoot()
     , HttpClientModule
     , NbSelectModule
     , NbListModule
     , NbTooltipModule
-    ,  NbAuthModule.forRoot({
+    , NbSidebarModule.forRoot()
+    , NbMenuModule.forRoot()
+    , NbThemeModule.forRoot({ name: 'default' })
+    , NbDialogModule.forRoot()
+    , NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
           baseEndpoint: 'http://localhost:3000',
-              login: {
-                endpoint: '/api/auth/login',
-              },
+          login: {
+            endpoint: '/api/auth/login',
+            method: 'post',
+            requireValidToken: true,
+            redirect: {
+              success: 'pages/requisition-dashboard',
+              failure: null,
+            },
+            defaultErrors: ['El email y/o password son incorrectos, intente más tarde'],
+            defaultMessages: ['Login Correcto'],
+          },
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token'
+          }
         }),
+
       ],
-      forms: {},
-    }), 
+      forms: {
+        login: {
+          redirectDelay: 500, //Change to 0 to cancel delay 
+          strategy: 'email',
+          rememberMe: true,
+          showMessages: {
+            success: true,
+            error: true,
+          },
+        },
+        validation: {
+          password: {
+            required: true,
+            minLength: 4,
+            maxLength: 10,
+          },
+          email: {
+            required: true,
+          },
+        },
+      },
+
+    })
+    , NbSecurityModule.forRoot({
+      accessControl: {
+        user: {
+          view: ['news', 'comments'],
+        },
+        admin: {
+          parent: 'user',
+          create: 'comments',
+        },
+        super_admin: {
+          parent: 'admin',
+          create: 'news',
+          remove: '*',
+        },
+      },
+    }
+    )
   ],
-  providers: [NbSidebarService, NbThemeService, NbDialogService],
+  providers: [NbSidebarService, NbThemeService, NbDialogService, AuthGuard,
+    {
+      provide: NbRoleProvider,
+      useValue: () => {
+        return observableOf('guest');
+      },
+    },
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

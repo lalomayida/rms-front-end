@@ -128,7 +128,7 @@ export class RoomEditComponent implements OnInit {
           this.header ="Éxito";
           this.body = "La instalación se ha editado exitosamente";
           this.open(dialog);
-          this.router.navigate(['/room-dashboard'])
+          this.router.navigate(['pages/room-dashboard'])
         }
       }
     )
@@ -139,7 +139,7 @@ export class RoomEditComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/room-dashboard'])
+    this.router.navigate(['pages/room-dashboard'])
   }
 
 }

@@ -62,7 +62,7 @@ export class RoomDashboardComponent implements OnInit {
   }
 
   editRoom(idRoom): void{
-    this.router.navigate(['/room-edit'],{
+    this.router.navigate(['pages/room-edit'],{
       queryParams: {
         id:idRoom
       }

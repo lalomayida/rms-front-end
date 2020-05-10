@@ -1,36 +1,27 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UsersDashboardComponent } from './pages/users-dashboard/users-dashboard.component';
-import { UserCreateComponent } from './pages/user-create/user-create.component';
-import { RoomDashboardComponent } from './pages/room-dashboard/room-dashboard.component';
-import { RoomCreateComponent } from './pages/room-create/room-create.component';
-import { UserEditComponent } from './pages/user-edit/user-edit.component';
-import { RoomEditComponent } from './pages/room-edit/room-edit.component';
+import { AuthGuard } from './guard/auth-guard.service';
 
 const routes: Routes = [
   {
-    path:'user-dashboard',
-    component: UsersDashboardComponent
+    path: 'pages',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
   },
   {
-    path:'user-create',
-    component: UserCreateComponent
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module')
+      .then(m => m.AuthModule),
   },
   {
-    path:'user-edit',
-    component: UserEditComponent
+    path: '',
+    redirectTo: 'pages/requisition-dashboard',
+    pathMatch: 'full'
   },
   {
-    path:'room-edit',
-    component: RoomEditComponent
-  },
-  {
-    path:'room-dashboard',
-    component: RoomDashboardComponent
-  },
-  {
-    path:'room-create',
-    component: RoomCreateComponent
+    path: '**',
+    redirectTo: 'pages/requisition-dashboard'
   },
 ];
 

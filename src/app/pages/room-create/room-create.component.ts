@@ -104,7 +104,7 @@ export class RoomCreateComponent implements OnInit {
           this.header ="Éxito";
           this.body = "La instalación se ha creado exitosamente";
           this.open(dialog);
-          this.router.navigate(['/room-dashboard'])
+          this.router.navigate(['pages/room-dashboard'])
         }
       }
     )
@@ -115,7 +115,7 @@ export class RoomCreateComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/room-dashboard'])
+    this.router.navigate(['pages/room-dashboard'])
   }
 
 }
