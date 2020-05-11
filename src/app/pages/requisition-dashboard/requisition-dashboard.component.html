@@ -1,1 +1,15 @@
- fgdhfjg
+<nb-card>
+    <nb-card-body>
+        <nb-tabset>
+            <nb-tab tabTitle="Mis Requisiciones" tabIcon="person-outline" responsive>
+                <app-my-requisitions-dashboard></app-my-requisitions-dashboard>
+            </nb-tab>
+            <nb-tab tabTitle="Requisiciones Asignadas" tabIcon="folder-outline" *ngIf="accessChecker.isGranted('view', 'assigned-requitions') | async" responsive>
+                <app-assigned-requisitions-dashboard></app-assigned-requisitions-dashboard>
+            </nb-tab>
+            <nb-tab tabTitle="Todas" tabIcon="layers-outline" *ngIf="accessChecker.isGranted('view', 'all-requitions') | async" responsive>
+               <app-all-requisitions-dashboard></app-all-requisitions-dashboard>
+            </nb-tab>
+        </nb-tabset>
+    </nb-card-body>
+</nb-card>

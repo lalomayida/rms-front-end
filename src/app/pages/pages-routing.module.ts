@@ -8,11 +8,21 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { RoomEditComponent } from './room-edit/room-edit.component';
 import { RequisitionDashboardComponent } from './requisition-dashboard/requisition-dashboard.component';
 import { PagesComponent } from './pages.component';
+import { RequisitionCreateComponent } from './requisition-create/requisition-create.component';
+import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'requisition-edit',
+      component: RequisitionEditComponent
+    },
+    {
+      path: 'requisition-create',
+      component: RequisitionCreateComponent
+    },
     {
       path: 'requisition-dashboard',
       component: RequisitionDashboardComponent

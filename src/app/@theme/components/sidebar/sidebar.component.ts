@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           title: 'Crear Requisiciones',
+          url:'/pages/requisition-create',
           icon: 'file-add-outline',
         },
       ]
@@ -58,6 +59,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           title: 'Crear Requisiciones',
+          url:'/pages/requisition-create',
           icon: 'file-add-outline',
         },
       ]
@@ -106,6 +108,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           title: 'Crear Requisiciones',
+          url:'/pages/requisition-create',
           icon: 'file-add-outline',
         },
       ]

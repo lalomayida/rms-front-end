@@ -6,6 +6,7 @@ import {
   , NbMenuModule
   , NbDialogModule
   , NbDialogService
+  , NbDatepickerModule 
 } from '@nebular/theme';
 import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 import { NbSecurityModule, NbRoleProvider } from '@nebular/security';
@@ -73,6 +74,7 @@ const validation: any = {
     , NbMenuModule.forRoot()
     , NbThemeModule.forRoot({ name: 'default' })
     , NbDialogModule.forRoot()
+    , NbDatepickerModule.forRoot()
     , NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -92,22 +94,22 @@ const validation: any = {
     , NbSecurityModule.forRoot({
       accessControl: {
         '1': {
-          view: ['own-requisitions','user'],
-          create: ['own-requisitions'],
-          edit: ['own-requisitions'],
-          remove: ['own-requisitions']
+          view: ['my-requisitions', 'user'],
+          create: ['requisitions'],
+          edit: ['requisitions'],
+          remove: ['requisitions']
         },
         '2': {
-          view: ['own-requisitions','assigned-requitions','rooms','admin'],
-          create: ['own-requisitions','assigned-requitions','rooms'],
-          edit:  ['own-requisitions','assigned-requitions', 'rooms'],
-          remove: ['own-requisitions','assigned-requisitions']
+          view: ['my-requisitions', 'assigned-requitions', 'rooms', 'admin'],
+          create: ['requisitions', 'rooms'],
+          edit: ['requisitions', 'rooms'],
+          remove: ['requisitions']
         },
         '3': {
-          view: ['own-requisitions','all-requitions', 'rooms','users','super_admin'],
-          create: ['own-requisitions','all-requitions', 'rooms','users'],
-          edit: ['own-requisitions','all-requitions', 'rooms','users'],
-          remove: ['own-requisitions','all-requisitions']
+          view: ['my-requisitions', 'assigned-requitions', 'all-requitions', 'rooms', 'users', 'super_admin'],
+          create: ['requisitions', 'rooms', 'users'],
+          edit: ['requisitions', 'rooms', 'users'],
+          remove: ['requisitions']
         },
       },
     }

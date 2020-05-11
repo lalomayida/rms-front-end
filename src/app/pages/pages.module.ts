@@ -18,6 +18,10 @@ import {
   , NbListModule
   , NbTooltipModule
   , NbContextMenuModule
+  , NbTabsetModule
+  , NbRouteTabsetModule
+  , NbDatepickerModule
+  , NbChatModule
 } from '@nebular/theme';
 import { CommonModule } from '@angular/common';  
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -37,6 +41,11 @@ import { UserEditComponent } from '../pages/user-edit/user-edit.component';
 import { RoomEditComponent } from '../pages/room-edit/room-edit.component';
 import { RequisitionDashboardComponent } from '../pages/requisition-dashboard/requisition-dashboard.component';
 import { PagesRoutingModule } from './pages-routing.module';
+import { MyRequisitionsDashboardComponent } from './my-requisitions-dashboard/my-requisitions-dashboard.component';
+import { AssignedRequisitionsDashboardComponent } from './assigned-requisitions-dashboard/assigned-requisitions-dashboard.component';
+import { AllRequisitionsDashboardComponent } from './all-requisitions-dashboard/all-requisitions-dashboard.component';
+import { RequisitionCreateComponent } from './requisition-create/requisition-create.component';
+import { RequisitionEditComponent } from './requisition-edit/requisition-edit.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +58,11 @@ import { PagesRoutingModule } from './pages-routing.module';
     , RoomDashboardComponent
     , UserEditComponent
     , RoomEditComponent
-    , RequisitionDashboardComponent],
+    , RequisitionDashboardComponent
+    , MyRequisitionsDashboardComponent
+    , AssignedRequisitionsDashboardComponent
+    , AllRequisitionsDashboardComponent
+    , RequisitionCreateComponent, RequisitionEditComponent],
   imports: [
     PagesRoutingModule
     , CommonModule
@@ -73,6 +86,10 @@ import { PagesRoutingModule } from './pages-routing.module';
     , NbSidebarModule
     , NbMenuModule
     , NbContextMenuModule
+    , NbTabsetModule
+    , NbRouteTabsetModule
+    , NbDatepickerModule
+    , NbChatModule
     , NbDialogModule.forChild()
   ],
   providers: [NbSidebarService, NbThemeService, NbDialogService]

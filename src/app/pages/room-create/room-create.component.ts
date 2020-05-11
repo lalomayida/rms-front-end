@@ -15,7 +15,7 @@ import { NbAccessChecker } from '@nebular/security';
   selector: 'app-room-create',
   templateUrl: './room-create.component.html',
   styleUrls: ['./room-create.component.scss'],
-  providers: [RoomTypeService, RoomAttributeService]
+  providers: [RoomTypeService, RoomAttributeService, RoomService]
 })
 export class RoomCreateComponent implements OnInit {
 

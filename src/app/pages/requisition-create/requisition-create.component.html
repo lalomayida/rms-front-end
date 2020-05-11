@@ -1,0 +1,84 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image">
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<nb-card>
+    <nb-card-header>Crear Requisición</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-6 pr-5">
+                <div class="form-group">
+                    <p for="room">Instalación</p>
+                    <nb-select id="room" fullWidth placeholder="Selecciona una instalación" [(ngModel)]="roomId"
+                        requiered>
+                        <nb-option *ngFor="let room of room" value="{{room.id}}">{{room.name}}</nb-option>
+                    </nb-select>
+                </div>
+                <div class="form-group">
+                    <p for="deparment">Departamento</p>
+                    <nb-select id="deparment" fullWidth placeholder="Selecciona un departamento"
+                        [(ngModel)]="deparmentId" requiered>
+                        <nb-option *ngFor="let deparment of deparment" value="{{deparment.id}}">{{deparment.name}}
+                        </nb-option>
+                    </nb-select>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6 pr-5">
+                        <p for="name">Fecha Inicial</p>
+                        <input nbInput placeholder="Selecciona una fecha" [nbDatepicker]="initialDate"
+                            [(ngModel)]="requisition.initialDate" fullWidth>
+                        <nb-datepicker #initialDate [min]="min" [max]="max"></nb-datepicker>
+                    </div>
+                    <div class="form-group col-6 pl-5">
+                        <p for="name">Fecha Final</p>
+                        <input nbInput placeholder="Selecciona una fecha" [nbDatepicker]="finalDate"
+                            [(ngModel)]="requisition.finalDate" fullWidth>
+                        <nb-datepicker #finalDate [min]="min" [max]="max"></nb-datepicker>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p for="description">Descripción del Evento</p>
+                    <textarea id="description" nbInput fullWidth placeholder="Descripción"
+                        [(ngModel)]="requisition.description"></textarea>
+                </div>
+
+            </div>
+            <div class="col-6 pl-5">
+                <div class="form-group">
+                    <p for="role">Necesidades</p>
+                    <nb-card class="need-list">
+                        <nb-card-body class="items-rows">
+                            <div class="row pb-5" *ngFor="let need of need">
+                                <nb-checkbox class="form-group col-6"
+                                    (checkedChange)="addRequisitionNeed($event,need.id)">{{need.name}}
+                                </nb-checkbox>
+                                <input class="form-group col-6" *ngIf="requisition.need.includes(need)" type="text"
+                                    id="{{need.id}}" (keyup)="addQuantity($event, need.id)" nbInput
+                                    placeholder="{{need.name}}" requiered>
+                            </div>
+
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+
+            <button class="mr-5" nbButton status="danger" (click)="cancel()">Cancelar</button>
+            <button class="ml-5" nbButton status="primary" (click)="create(dialog)">Crear Instalación</button>
+        </div>
+
+    </nb-card-body>
+</nb-card>

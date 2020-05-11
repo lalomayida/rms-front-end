@@ -1,0 +1,89 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image">
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<nb-card>
+    <nb-card-header>Editar Requisición - {{requisition.id}}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-6 pr-10">
+                <div class="form-group">
+                    <p for="room">Instalación</p>
+                    <nb-card class="form-values">
+                        <nb-card-body><label>{{roomName}}</label></nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="form-group">
+                    <p for="deparment">Departamento</p>
+                    <nb-card class="form-values">
+                        <nb-card-body><label>{{deparmentName}}</label></nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6 pr-5">
+                        <p for="name">Fecha Inicial</p>
+                        <nb-card class="form-values">
+                            <nb-card-body><label>{{requisition.initialDate}}</label></nb-card-body>
+                        </nb-card>
+                    </div>
+                    <div class="form-group col-6 pl-5">
+                        <p for="name">Fecha Final</p>
+                        <nb-card class="form-values">
+                            <nb-card-body><label>{{requisition.finalDate}}</label></nb-card-body>
+                        </nb-card>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <p for="description">Descripción del Evento</p>
+                    <nb-card class="form-values">
+                        <nb-card-body><label>{{requisition.description}}</label></nb-card-body>
+                    </nb-card>
+                </div>
+                <div class="form-group">
+                    <p for="role">Necesidades</p>
+                    <nb-card class="need-list">
+                        <nb-card-body class="items-rows">
+                            <div class="row pb-5" *ngFor="let need of requisition.need">
+                                <label>
+                                    <nb-icon icon="checkmark-outline" status="success"></nb-icon>
+                                    {{need.name}} - {{need.quantity}}
+                                </label>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+            <div class="col-6 pl-5">
+                <nb-chat title="Comentarios de la requisición" size="medium" status="primary">
+                    <nb-chat-message *ngFor="let message of messages"
+                                     [message]="message.text"
+                                     [reply]="!message.reply"
+                                     [sender]="message.user.name"
+                                     [date]="message.date"
+                                     [avatar]="message.user.avatar">
+                    </nb-chat-message>
+                    <nb-chat-form (send)="sendMessage($event, 'John', 'https://i.gifer.com/no.gif', false)" [showButton]="false" [dropFiles]="true">
+                    </nb-chat-form>
+                  </nb-chat>
+            </div>
+        </div>
+       
+        <div class="buttons">
+
+            <button class="mr-5" nbButton status="danger" (click)="cancel()">Cancelar</button>
+            <button class="ml-5" nbButton status="primary" (click)="create(dialog)">Crear Instalación</button>
+        </div>
+
+    </nb-card-body>
+</nb-card>

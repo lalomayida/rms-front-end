@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-requisition-dashboard',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequisitionDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public accessChecker: NbAccessChecker
+  ) {}
 
-  ngOnInit(): void {
-    
+  ngOnInit() {
   }
-
 }

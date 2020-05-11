@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
 
   clearToken() {
     this.authService.logout('email').subscribe(response =>{
-      console.log(response);
     })
   }
 

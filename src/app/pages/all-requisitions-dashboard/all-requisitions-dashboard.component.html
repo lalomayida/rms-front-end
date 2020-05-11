@@ -1,0 +1,58 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image" >
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img  *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<ngx-datatable class="material" rowHeight="auto" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [limit]="10"
+    [columns]="columns">
+    <ngx-datatable-column name="Id" prop="id" [width]="50">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Instalación" prop="room.name" [width]="200">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Usuario" prop="user.name" [width]="150">
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Fecha Inicial" prop="initial_date" [width]="180">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Fecha Final" prop="final_date" [width]="180">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Status" prop="status.name" [width]="120">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+        </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Acciones" prop="id" [width]="220"> 
+        <ng-template let-value="value" ngx-datatable-cell-template>
+            <a style="cursor: pointer" class="edit-button" (click)="editRequisition(value)">
+                <nb-icon icon="edit-outline"></nb-icon> Editar
+            </a> |
+            <a style="cursor: pointer" class="edit-button" (click)="deleteRequisition(value, dialog)">
+                <nb-icon icon="trash-2-outline"></nb-icon> Eliminar
+            </a>
+        </ng-template>
+    </ngx-datatable-column>
+</ngx-datatable>
