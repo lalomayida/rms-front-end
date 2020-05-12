@@ -36,10 +36,6 @@ export class SidebarComponent implements OnInit {
         },
       ]
     },
-    {
-      title: 'Help',
-      icon: 'question-mark-circle-outline'
-    },
   ];
 
   adminItems: NbMenuItem[] = [
@@ -84,10 +80,6 @@ export class SidebarComponent implements OnInit {
           url: 'pages/room-create'
         },
       ]
-    },
-    {
-      title: 'Help',
-      icon: 'question-mark-circle-outline'
     },
   ];
 
@@ -151,10 +143,6 @@ export class SidebarComponent implements OnInit {
           url: 'pages/room-create'
         },
       ]
-    },
-    {
-      title: 'Help',
-      icon: 'question-mark-circle-outline'
     },
   ];
 }

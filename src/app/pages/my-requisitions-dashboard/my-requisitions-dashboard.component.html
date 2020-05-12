@@ -47,9 +47,13 @@
     </ngx-datatable-column>
     <ngx-datatable-column name="Acciones" prop="id" [width]="220"> 
         <ng-template let-value="value" ngx-datatable-cell-template>
-            <a style="cursor: pointer" class="edit-button" (click)="editRequisition(value)">
+            <a style="cursor: pointer" *ngIf="accessChecker.isGranted('view', 'user') | async" class="edit-button" (click)="editRequisition(value)">
+                <nb-icon icon="eye-outline"></nb-icon> Detalle
+            </a>
+            <a style="cursor: pointer" *ngIf="accessChecker.isGranted('edit', 'assigned-requisitions') | async" class="edit-button" (click)="editRequisition(value)">
                 <nb-icon icon="edit-outline"></nb-icon> Editar
-            </a> |
+            </a>
+            |
             <a style="cursor: pointer" class="edit-button" (click)="deleteRequisition(value, dialog)">
                 <nb-icon icon="trash-2-outline"></nb-icon> Eliminar
             </a>

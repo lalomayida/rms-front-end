@@ -3,10 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NbDialogService, NbDialogConfig, NbDateService } from '@nebular/theme';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 
-import { DeparmentService } from "src/services/department/department.service";
-import { RoomService } from "src/services/room/room.service";
-import { NeedService } from "src/services/need/need.service";
 import { RequisitionService } from "src/services/requisition/requisition.service";
+import { StatusService } from "src/services/status/status.service";
 
 import { Requisition } from 'src/app/models/requisition';
 import { Department } from 'src/app/models/department';
@@ -14,59 +12,43 @@ import { Room } from 'src/app/models/room';
 import { Need } from 'src/app/models/need';
 import { User } from 'src/app/models/user';
 import { Agent } from 'src/app/models/agent';
+import { Status } from 'src/app/models/status';
+import { Comment } from 'src/app/models/comment';
+
+import { NbAccessChecker } from '@nebular/security';
 
 @Component({
   selector: 'app-requisition-edit',
   templateUrl: './requisition-edit.component.html',
   styleUrls: ['./requisition-edit.component.scss'],
-  providers: [DeparmentService, RoomService, NeedService, RequisitionService]
+  providers: [RequisitionService, StatusService]
 })
 export class RequisitionEditComponent implements OnInit {
 
   requisition: Requisition = new Requisition(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, [], []);
-  user: User = new User(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-  agent: Agent = new Agent(0,null,null,null,null,null,null,null,null);
-  deparment: Department[] = [];
-  room: Room[] = [];
-  need: Need[] = [];
+  sessionUser: User = new User(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
   roomName: String = '';
   deparmentName: String = '';
+  agentName: String = '';
+  userName: String = '';
+  statusName: String = '';
+  statusId: Number = 0;
+  status: Status[] = [];
   min: Date;
   max: Date;
   header: String = '';
   body: String = '';
-
+  level: Number = 0;
   messages: any[] = [];
-
-  sendMessage(event: any, userName: string, avatar: string, reply: boolean) {
-    const files = !event.files ? [] : event.files.map((file) => {
-      return {
-        url: file.src,
-        type: file.type,
-        icon: 'file-text-outline',
-      };
-    });
-
-    this.messages.push({
-      text: event.message,
-      date: new Date(),
-      reply: reply,
-      type: files.length ? 'file' : 'text',
-      files: files,
-      user: {
-        name: userName,
-        avatar: avatar,
-      },
-    });
-  }
 
   constructor(
     private authService: NbAuthService,
     private requisitionService: RequisitionService,
-    private needService: NeedService,
+    private statusService: StatusService,
     protected dateService: NbDateService<Date>,
     private dialogService: NbDialogService,
     private router: Router,
+    public accessChecker: NbAccessChecker,
     private activeRoute: ActivatedRoute,
   ) {
     this.min = this.dateService.addMonth(this.dateService.today(), 0);
@@ -75,15 +57,31 @@ export class RequisitionEditComponent implements OnInit {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
         if (token.isValid()) {
-          this.user = token.getPayload();
+          this.sessionUser = token.getPayload();
+          console.log(this.sessionUser)
         }
       });
-
   }
 
   async ngOnInit(): Promise<void> {
     var requisitionId = this.activeRoute.snapshot.queryParams.id;
     this.setRequisition(requisitionId);
+    this.setStatus();
+  }
+
+  sendMessage(event: any, receivedUser: User, reply: boolean) {
+    console.log(receivedUser)
+    this.messages.push({
+      comment: event.message,
+      submit_date: new Date(),
+      reply: reply,
+      user: receivedUser
+    });
+
+    let newComment: Comment = new Comment(0, event.message, receivedUser, new Date());
+    this.requisition.comment.push(newComment);
+    console.log(this.requisition);
+    console.log(this.messages);
   }
 
   setRequisition(id): void {
@@ -93,70 +91,75 @@ export class RequisitionEditComponent implements OnInit {
           this.requisition = result.data;
           this.roomName = this.requisition.room.name;
           this.deparmentName = this.requisition.deparment.name;
-          this.setNeeds();
+          this.agentName = this.requisition.agent.name + ' ' + this.requisition.agent.surname;
+          this.userName = this.requisition.user.name + ' ' + this.requisition.user.surname;
+          this.statusId = this.requisition.status.id;
+          this.statusName = this.requisition.status.name;
+          this.level = this.requisition.agent.level;
+          this.setMessages();
         }
       }
     );
   }
 
-  setNeeds() {
-    this.needService.getNeed().subscribe(
-      result => {
-        if (result.status === 'success') {
-          this.need = result.data;
-          this.need.forEach(comboNeed=>{
-            this.requisition.need.forEach(objNeed =>{
-              if(comboNeed.id == objNeed.id){
-                comboNeed.quantity = objNeed.quantity
-              }
-            });  
-          })
-        }
+  setMessages() {
+    this.messages = this.requisition.comment;
+    this.messages.forEach(message => {
+      if (message.user.id === this.sessionUser.id) {
+        message.reply = false;
       }
-    );
+      else {
+        message.reply = true;
+      }
+    });
+    this.requisition.comment = [];
   }
 
-  addQuantity(event: any, id) {
-    if (event.target.value.length != 0) {
-      this.requisition.need.forEach(need => {
-        if (need.id == id) {
-          need.quantity = event.target.value;
-        }
-      });
-    }
+  setStatus() {
+    this.statusService.getStatus().subscribe(result => {
+      if (result.status === 'success') {
+        this.status = result.data;
+      }
+    })
   }
 
-  addRequisitionNeed(event: any, id) {
+  edit(dialog: TemplateRef<any>) {
 
-    if (event) {
-      this.need.forEach(need => {
-        if (need.id == id) {
-          this.requisition.need.push(need);
-        }
-      });
-    }
-    else {
-      this.requisition.need.forEach(need => {
-        if (need.id == id) {
-          var index = this.requisition.need.indexOf(need);
-          this.requisition.need.splice(index, 1);
-        }
-      })
-    }
-  }
-
-  create(dialog: TemplateRef<any>) {
-
-    this.requisition.user = this.user;
-    this.requisition.agent = this.agent;
+    this.status.forEach(status => {
+      if (status.id == this.statusId) {
+        this.requisition.status = status;
+      }
+    });
 
     console.log(this.requisition)
 
-    this.requisitionService.createRequisition(this.requisition).subscribe(
+    this.requisitionService.editRequisition(this.requisition).subscribe(
       result => {
         if (result.status === 'success') {
-          this.header ="Éxito";
-          this.body = "La instalación se ha creado exitosamente";
+          this.header = "Éxito";
+          this.body = "La requisición se ha editado exitosamente";
+          this.open(dialog);
+          this.router.navigate(['pages/requisition-dashboard'])
+        }
+      }
+    )
+  }
+
+  promote(dialog: TemplateRef<any>) {
+
+    this.status.forEach(status => {
+      if (status.id == this.statusId) {
+        this.requisition.status = status;
+      }
+    });
+
+    console.log(this.requisition)
+
+    this.requisitionService.promoteRequisition(this.requisition).subscribe(
+      result => {
+        if (result.status === 'success') {
+          this.header = "Éxito";
+          this.body = "La requisicion se ha promovido al siguiente nivel exitosamente";
           this.open(dialog);
           this.router.navigate(['pages/requisition-dashboard'])
         }

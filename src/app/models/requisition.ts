@@ -4,6 +4,7 @@ import { Department } from './department';
 import { Status } from './status';
 import { Need } from './need';
 import { Agent } from './agent';
+import { Comment } from './comment'
 
 export class Requisition {
     id: number;

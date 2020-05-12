@@ -102,13 +102,13 @@ const validation: any = {
         '2': {
           view: ['my-requisitions', 'assigned-requitions', 'rooms', 'admin'],
           create: ['requisitions', 'rooms'],
-          edit: ['requisitions', 'rooms'],
+          edit: ['assigned-requisitions', 'rooms'],
           remove: ['requisitions']
         },
         '3': {
           view: ['my-requisitions', 'assigned-requitions', 'all-requitions', 'rooms', 'users', 'super_admin'],
           create: ['requisitions', 'rooms', 'users'],
-          edit: ['requisitions', 'rooms', 'users'],
+          edit: ['assigned-requisitions', 'rooms', 'users'],
           remove: ['requisitions']
         },
       },

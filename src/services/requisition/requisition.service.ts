@@ -15,6 +15,7 @@ const restOptions = {
 export class RequisitionService {
     constructor(private http: HttpClient) { }
     private requisitionUrl = 'api/requisition-management/requisition';
+    private promoteRequisitionUrl = 'api/requisition-management/promote';
     private userRequisitionsUrl = 'api/requisition-management/user-requisitions';
     private agentRequisitionsUrl = 'api/requisition-management/agent-requisitions';
     private allRequisitionsUrl = 'api/requisition-management/all-requisitions';
@@ -76,7 +77,7 @@ export class RequisitionService {
     }
 
     promoteRequisition(requisition): Observable<any> {
-        return this.http.put<any>(this.requisitionUrl, requisition)
+        return this.http.put<any>(this.promoteRequisitionUrl, requisition)
             .pipe(
                 catchError(this.handleError('promoteRequisition', []))
             );
