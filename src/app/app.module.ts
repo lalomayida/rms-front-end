@@ -79,7 +79,7 @@ const validation: any = {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint: 'http://localhost:3000',
+          baseEndpoint: 'https://shielded-savannah-11861.herokuapp.com',
           login: login,
           logout: logout,
           token: { class: NbAuthJWTToken, key: 'token' }

@@ -1,6 +1,7 @@
 {
   "name": "rms-front-end",
   "version": "0.0.0",
+  "proxy":"https://shielded-savannah-11861.herokuapp.com/",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
