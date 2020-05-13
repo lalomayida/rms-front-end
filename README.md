@@ -1,10 +1,17 @@
-# RmsFrontEnd
+# RMS
+Requisition Management System is a tool intended to help manage room booking and event coordination within organizations. 
+The tool allows you to create and manage rooms, to create and manage users, and to create and manage requisitions through different levels of approval
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
+## Install
+Clone or download the repository
+```
+cd rms-front-end
+npm install
+```
 
-## Development server
+## Start
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
@@ -22,6 +29,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Dependencies 
+[RMS API](https://github.com/lalomayida/RMS_REST_API) - Node.js API 
+[Nebular](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular#what-is-nebular) -  Customizable Angular UI Library based on Eva Design System specifications. 
+[Eva Design System](https://eva.design/) - Design system used within the appliaction
+[Ngx Datatable](https://swimlane.github.io/ngx-datatable/) - Datatable plugin used within the project 
