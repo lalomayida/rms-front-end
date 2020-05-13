@@ -30,7 +30,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Dependencies 
-[RMS API](https://github.com/lalomayida/RMS_REST_API) - Node.js API 
-[Nebular](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular#what-is-nebular) -  Customizable Angular UI Library based on Eva Design System specifications. 
-[Eva Design System](https://eva.design/) - Design system used within the appliaction
-[Ngx Datatable](https://swimlane.github.io/ngx-datatable/) - Datatable plugin used within the project 
+* [RMS API](https://github.com/lalomayida/RMS_REST_API) - Node.js API 
+* [Nebular](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular#what-is-nebular) -  Customizable Angular UI Library based on Eva Design System specifications. 
+* [Eva Design System](https://eva.design/) - Design system used within the appliaction
+* [Ngx Datatable](https://swimlane.github.io/ngx-datatable/) - Datatable plugin used within the project 
