@@ -34,3 +34,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 * [Nebular](https://akveo.github.io/nebular/docs/getting-started/what-is-nebular#what-is-nebular) -  Customizable Angular UI Library based on Eva Design System specifications. 
 * [Eva Design System](https://eva.design/) - Design system used within the appliaction
 * [Ngx Datatable](https://swimlane.github.io/ngx-datatable/) - Datatable plugin used within the project 
+
+### Author
+[Luis Eduardo Mayida González](https://github.com/lalomayida)
+
+### License
+MIT
