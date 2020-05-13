@@ -12,4 +12,6 @@ app.get('/*', function(req,res) {
 res.sendFile(path.join(__dirname+'/dist/rms-front-end/index.html'));
 });
 
+
 // Start the app by listening on the default H
+app.listen(process.env.PORT || 8080);
