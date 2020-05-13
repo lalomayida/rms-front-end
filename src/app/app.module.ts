@@ -79,7 +79,7 @@ const validation: any = {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint: 'https://obscure-shore-09597.herokuapp.com',
+          baseEndpoint: 'http://localhost:3000',
           login: login,
           logout: logout,
           token: { class: NbAuthJWTToken, key: 'token' }

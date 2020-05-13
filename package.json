@@ -1,10 +1,9 @@
 {
   "name": "rms-front-end",
   "version": "0.0.0",
-  "proxy": "https://obscure-shore-09597.herokuapp.com/",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve --proxy-config proxy.conf.json --port 4401",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
