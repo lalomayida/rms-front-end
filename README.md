@@ -39,4 +39,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 [Luis Eduardo Mayida González](https://github.com/lalomayida)
 
 ### License
-MIT
+Not allowed use without consent of the author
