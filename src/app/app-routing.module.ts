@@ -10,16 +10,6 @@ const routes: Routes = [
       .then(m => m.PagesModule),
   },
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module')
-      .then(m => m.AuthModule),
-  },
-  {
-    path: '',
-    redirectTo: 'pages/requisition-dashboard',
-    pathMatch: 'full'
-  },
-  {
     path: '**',
     redirectTo: 'pages/requisition-dashboard'
   },
