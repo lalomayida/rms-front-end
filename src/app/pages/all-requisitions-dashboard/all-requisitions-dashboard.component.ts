@@ -73,10 +73,6 @@ export class AllRequisitionsDashboardComponent implements OnInit {
     });
   }
 
-  open(dialog: TemplateRef<any>) {
-    this.dialogService.open(dialog, {});
-  }
-
   deleteRequisition(idRequisition, successDialog: TemplateRef<any>): void {
     
       this.requisitionService.deleteRequisition({ id: idRequisition }).subscribe(
@@ -91,5 +87,9 @@ export class AllRequisitionsDashboardComponent implements OnInit {
       );
     
   }
+  open(dialog: TemplateRef<any>) {
+    this.dialogService.open(dialog, {});
+  }
+
 
 }
