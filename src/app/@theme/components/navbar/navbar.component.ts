@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
 import { User } from '../../../models/user';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
 
   sessionUser: User = new User(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
