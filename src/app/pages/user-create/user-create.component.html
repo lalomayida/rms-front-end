@@ -1,0 +1,63 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image">
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<nb-card *ngIf="accessChecker.isGranted('create', 'users') | async">
+    <nb-card-header>Crear Usuario</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="form-group col-6 pr-5">
+                <p for="expedient_number">Numero de Expediente</p>
+                <input id="expedient_number" type="text" [(ngModel)]="user.expedient_number" nbInput fullWidth
+                    placeholder="Numero de Expediente" requiered>
+            </div>
+            <div class="form-group col-6 pl-5">
+                <p for="password">Contraseña</p>
+                <input id="password" type="text" [(ngModel)]="user.password" nbInput fullWidth placeholder="Contraseña"
+                    requiered>
+            </div>
+        </div>
+        <div class="row">
+
+
+            <div class="form-group col-6 pr-5">
+                <p for="name">Nombre</p>
+                <input id="name" type="text" [(ngModel)]="user.name" nbInput fullWidth placeholder="Nombre" requiered>
+            </div>
+            <div class="form-group col-6 pl-5">
+                <p for="surname">Apellido</p>
+                <input id="surname" type="text" [(ngModel)]="user.surname" nbInput fullWidth placeholder="Apellido"
+                    requiered>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-6 pr-5">
+                <p for="email">Email</p>
+                <input id="email" type="email" [(ngModel)]="user.mail" nbInput fullWidth placeholder="Email" requiered>
+            </div>
+            <div class="form-group col-6 pl-5">
+                <p for="role">Rol</p>
+                <nb-select id="role" fullWidth placeholder="Selecciona un Rol" [(ngModel)]="roleId" requiered>
+                    <nb-option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</nb-option>
+                </nb-select>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="mr-5" nbButton status="danger" (click)="cancel()">Cancelar</button>
+            <button class="ml-5" nbButton status="primary" (click)="create(dialog)">Crear Usuario</button>
+        </div>
+
+    </nb-card-body>
+</nb-card>

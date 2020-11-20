@@ -1,0 +1,86 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image" >
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img  *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+
+<nb-card *ngIf="accessChecker.isGranted('edit', 'rooms') | async">
+    <nb-card-header>Editar Instalación - {{room.name}}</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-6 pr-5">
+                <div class="form-group">
+                    <p for="name">Nombre</p>
+                    <input id="name" type="text" [(ngModel)]="room.name" nbInput fullWidth placeholder="Nombre"
+                        requiered disabled>
+                </div>
+                <div class="form-group">
+                    <p for="capacity">Capacidad</p>
+                    <input id="capacity" type="text" [(ngModel)]="room.capacity" nbInput fullWidth
+                        placeholder="Capacidad" requiered>
+                </div>
+                <div class="form-group">
+                    <p for="width">Ancho</p>
+                    <input id="width" type="text" [(ngModel)]="room.width" nbInput fullWidth placeholder="Ancho"
+                        requiered disabled>
+                </div>
+
+                <div class="form-group">
+                    <p for="length">Largo</p>
+                    <input id="length" type="email" [(ngModel)]="room.length" nbInput fullWidth placeholder="Alto"
+                        requiered disabled>
+                </div>
+                <div class="form-group">
+                    <p for="role">Tipo de Instalación</p>
+                    <nb-select id="role" fullWidth placeholder="{{roomTypeName}}" [(ngModel)]="roomTypeId" requiered disabled>
+                        <nb-option *ngFor="let room of roomTypes" value="{{room.id}}">{{room.name}}</nb-option>
+                    </nb-select>
+                </div>
+            </div>
+            <div class="col-6 pl-5">
+                <div class="form-group">
+                    <p for="role">Atributos</p>
+                    <nb-card class="attribute-list">
+                        <nb-card-body class="items-rows">
+                            <div class="row pb-5" *ngFor="let attribute of roomAttributes">
+
+                                <nb-checkbox class="form-group col-6" *ngIf="attribute.quantity"
+                                    checked="true" (checkedChange)="addRoomAttribute($event,attribute.id)">
+                                    {{attribute.name}}
+                                </nb-checkbox>
+
+                                <input class="form-group col-6" *ngIf="attribute.quantity" type="text"
+                                    id="{{attribute.id}}" nbInput (keyup)="addQuantity($event, attribute.id)"
+                                    placeholder="{{attribute.name}}" value="{{attribute.quantity}}" requiered>
+
+                                <nb-checkbox class="form-group col-6" *ngIf="!attribute.quantity"
+                                    (checkedChange)="addRoomAttribute($event,attribute.id)">{{attribute.name}}
+                                </nb-checkbox>
+
+                                <input class="form-group col-6" *ngIf="room.attribute.includes(attribute) && !attribute.quantity" type="text"
+                                    id="{{attribute.id}}" (keyup)="addQuantity($event, attribute.id)" nbInput
+                                    placeholder="{{attribute.name}}" requiered>
+                            </div>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="mr-5" nbButton status="danger" (click)="cancel()">Cancelar</button>
+            <button class="ml-5" nbButton status="primary" (click)="create(dialog)">Editar Instalación</button>
+        </div>
+
+    </nb-card-body>
+</nb-card>

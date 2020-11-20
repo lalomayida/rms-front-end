@@ -1,0 +1,49 @@
+<nb-card *ngIf="accessChecker.isGranted('view', 'rooms') | async">
+    <nb-card-header>Listado de Usuarios</nb-card-header>
+    <nb-card-body>
+        <input nbInput type="text" style="padding:8px;margin:15px auto;width:30%;"
+            placeholder="Filtra por la columna de nombre..." (keyup)="updateFilter($event)" />
+
+        <ngx-datatable class="material" rowHeight="auto" [rows]="rows" [headerHeight]="50" [footerHeight]="50"
+            [limit]="10" [columns]="columns" >
+            
+            <ngx-datatable-column name="Id" prop="id" [width]="100">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Nombre" prop="name" [width]="350">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Capacidad" prop="capacity">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Ancho" prop="width" >
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Largo" prop="length" >
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Visible" prop="is_visible">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{ value }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Acciones" prop="id">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <a style="cursor: pointer" class="edit-button" (click)="editRoom(value)">
+                        <nb-icon icon="edit-outline"></nb-icon> Editar
+                    </a>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </nb-card-body>
+</nb-card>

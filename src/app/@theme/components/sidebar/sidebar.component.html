@@ -1,0 +1,4 @@
+<nb-menu [items]="superAdminItems" autoCollapse="true" *ngIf="accessChecker.isGranted('view', 'super_admin') | async">
+</nb-menu>
+<nb-menu [items]="adminItems" autoCollapse="true" *ngIf="accessChecker.isGranted('view', 'admin') | async"></nb-menu>
+<nb-menu [items]="userItems" autoCollapse="true" *ngIf="accessChecker.isGranted('view', 'user') | async"></nb-menu>

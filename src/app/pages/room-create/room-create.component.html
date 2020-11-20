@@ -1,0 +1,77 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+    <nb-card>
+        <nb-card-header>{{header}}</nb-card-header>
+        <nb-card-body>
+            {{body}}
+            <div class="dialog-image" >
+                <img *ngIf="header == 'Éxito'" src="../../../assets/img/success.png" alt="success">
+                <img  *ngIf="header == 'Error'" src="../../../assets/img/error.png" alt="error">
+            </div>
+        </nb-card-body>
+        <nb-card-footer>
+            <button nbButton status="primary" (click)="ref.close()">Cerrar</button>
+        </nb-card-footer>
+    </nb-card>
+</ng-template>
+<nb-card *ngIf="accessChecker.isGranted('create', 'rooms') | async">
+    <nb-card-header>Crear Instalación</nb-card-header>
+    <nb-card-body>
+        <div class="row">
+            <div class="col-6 pr-5">
+                <div class="form-group">
+                    <p for="name">Nombre</p>
+                    <input id="name" type="text" [(ngModel)]="room.name" nbInput fullWidth placeholder="Nombre"
+                        requiered>
+                </div>
+                <div class="form-group">
+                    <p for="capacity">Capacidad</p>
+                    <input id="capacity" type="text" [(ngModel)]="room.capacity" nbInput fullWidth
+                        placeholder="Capacidad" requiered>
+                </div>
+                <div class="form-group">
+                    <p for="width">Ancho</p>
+                    <input id="width" type="text" [(ngModel)]="room.width" nbInput fullWidth placeholder="Ancho"
+                        requiered>
+                </div>
+
+                <div class="form-group">
+                    <p for="length">Largo</p>
+                    <input id="length" type="email" [(ngModel)]="room.length" nbInput fullWidth placeholder="Alto"
+                        requiered>
+                </div>
+                <div class="form-group">
+                    <p for="role">Tipo de Instalación</p>
+                    <nb-select id="role" fullWidth placeholder="Selecciona un Tipo" [(ngModel)]="roomTypeId" requiered>
+                        <nb-option *ngFor="let room of roomTypes" value="{{room.id}}">{{room.name}}</nb-option>
+                    </nb-select>
+                </div>
+            </div>
+            <div class="col-6 pl-5">
+                <div class="form-group">
+                    <p for="role">Atributos</p>
+                    <nb-card class="attribute-list">
+                        <nb-card-body class="items-rows">
+
+                            <div class="row pb-5" *ngFor="let attribute of roomAttributes">
+                                <nb-checkbox class="form-group col-6"
+                                    (checkedChange)="addRoomAttribute($event,attribute.id)">{{attribute.name}}
+                                </nb-checkbox>
+                                <input class="form-group col-6" *ngIf="room.attribute.includes(attribute)" type="text"
+                                    id="{{attribute.id}}" (keyup)="addQuantity($event, attribute.id)" nbInput
+                                    placeholder="{{attribute.name}}" requiered>
+                            </div>
+
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+
+            <button class="mr-5" nbButton status="danger" (click)="cancel()">Cancelar</button>
+            <button class="ml-5" nbButton status="primary" (click)="create(dialog)">Crear Instalación</button>
+        </div>
+
+    </nb-card-body>
+</nb-card>

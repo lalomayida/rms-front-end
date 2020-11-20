@@ -1,0 +1,30 @@
+@import 'src/themes.scss';
+.row{display: flex;}
+.col-6{ width: 50%;}
+.pl-5{ padding-left: .5rem;}
+.pr-5{ padding-right: .5rem;}
+.pb-5{ padding-bottom: .8rem;}
+.ml-5{ margin-left: .5rem;}
+.mr-5{ margin-right: .5rem;}
+.form-group{padding-bottom:.5rem;}
+p{padding-bottom: .5px;}
+.buttons{padding: 1rem 0;}
+
+.need-list{
+  max-height: 435px;
+}
+
+.dialog-image{
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+
+nb-card-body.items-rows {
+  align-items: center;
+}
+
+nb-checkbox:not(:only-child) {
+  margin-right: 1.5rem;
+  display: block;
+}
