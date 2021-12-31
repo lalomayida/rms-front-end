@@ -2,6 +2,12 @@
 Requisition Management System is a tool intended to help manage room booking and event coordination within organizations. 
 The tool allows you to create and manage rooms, to create and manage users, and to create and manage requisitions through different levels of approval
 
+# Architecture Diagram
+
+RMS was desing following the MVC approach, the arquitecture under which it was developed is shown bellow
+
+![Architecture Diagram](https://drive.google.com/uc?export=view&id=1WUrLCLSNykH1Sv1jmoycs_xOaZueRWPT)
+
 ## Install
 Clone or download the repository
 ```
