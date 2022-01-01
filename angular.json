@@ -71,7 +71,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "rms-front-end:build:production"
+              "browserTarget": "rms-front-end:build:production",
+              "proxyConfig": "proxy.conf.json"
             }
           }
         },

@@ -1,6 +1,7 @@
 {
     "/api": {
-      "target": "https://requisition-management-db.herokuapp.com/api",
+      "target": "https://requisition-management-db.herokuapp.com/",
       "changeOrigin": true,
-      "secure": false    }
+      "secure": false    
+    }
   }
