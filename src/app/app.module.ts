@@ -79,7 +79,7 @@ const validation: any = {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint: 'https://requisition-management-rest.herokuapp.com/',
+          baseEndpoint: 'https://requisition-management-rest.herokuapp.com',
           login: login,
           logout: logout,
           token: { class: NbAuthJWTToken, key: 'token' }
